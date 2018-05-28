@@ -1,0 +1,39 @@
+<ion-view>
+  <div class="bar bar-header custom-navbar">
+    <span class="custom-title">My Account</span>
+  </div>
+
+  <!--content start here-->
+  <ion-content class="has-header-60" overflow-scroll="true" has-bouncing="false">
+    <div ng-if="isUserLoggedIn">
+      <md-list-item on-tap="goToProfilePage()">
+        <i class="icon ion-person"></i>
+        <span class="f-w-500 m-l-10">{{loggedInUser.name}}</span>
+        <span class="f-s-10 m-l-20" style="position: absolute;top: 30px;left: 18px;">View profile</span>
+        <i class="icon ion-chevron-right custom-right"></i>
+        <br><br>
+        <md-divider></md-divider>
+      </md-list-item>
+
+      <md-subheader class="md-no-sticky f-s-12 text-color-grey f-w-700">Services</md-subheader>
+      <md-list-item on-tap="goToPage(i.link)" ng-repeat="i in accountMenus" ng-if="i.section == 1">
+        <i class="primary-color f-s-30 icon {{i.iconName}}"></i>
+        <p class="p-absolute f-s-15 l-60"> {{ i.name }} </p>
+        <i class="icon ion-chevron-right custom-right"></i>
+        <md-divider></md-divider>
+      </md-list-item>
+      <md-subheader class="md-no-sticky f-s-12 text-color-grey f-w-700">Security</md-subheader>
+      <md-list-item on-tap="goToPage(i.link)" ng-repeat="i in accountMenus" ng-if="i.section == 2">
+        <i class="primary-color f-s-30 icon {{i.iconName}}"></i>
+        <p class="p-absolute f-s-15 l-60"> {{ i.name }} </p>
+        <i class="icon ion-chevron-right custom-right"></i>
+        <md-divider></md-divider>
+      </md-list-item>
+      <br><br>
+      <div class="row">
+        <md-button class="md-raised w-100 f-s-10 h-45" on-tap="userLogout()">LOGOUT</md-button>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

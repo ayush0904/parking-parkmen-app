@@ -1,0 +1,68 @@
+<ion-view>
+  <div class="bar bar-header custom-navbar">
+    <md-button class="md-icon-button" ng-click="goBack()" aria-label="More">
+      <i class="text-color-black icon ion-android-arrow-back"></i>
+    </md-button>
+    <span class="custom-title">Add QR Code</span>
+  </div>
+  <!--content start here-->
+  <ion-content class="has-header-60" overflow-scroll="false">
+    <form name="addQrCode">
+      <!--show vehical icons-->
+      <div class="row">
+        <div class="col" ng-repeat="type in vehicalTypeArray">
+          <md-card class="custom-card-view text-center">
+            <label class="custom-input-label" style="height: 90px;">
+              <input type="radio" name="vehical" ng-click="buttonClickable()" ng-model="qrCodeModel.vehicalId"
+                     ng-value="type.vehicalTypeId"/>
+              <img ng-src="img/icons/{{type.vehicalTypeName}}.svg" height="80" width="80">
+            </label>
+          </md-card>
+        </div>
+      </div>
+
+      <!--show vehical type-->
+      <div class="row">
+        <div class="col  text-center">
+        <span class="f-w-700"
+              style="font-size:20px;text-transform: uppercase;color: #39135B;">{{qrCodeModel.vehicalType}}</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Mobile No</span>
+            <input type="number" required ng-minlength="10" ng-maxlength="10" name="mobileNo"
+                   ng-model="qrCodeModel.mobileNo" placeholder="Customer Mobile No">
+          </label>
+          <span class="f-s-10 text-color-red"
+                ng-show="addQrCode.mobileNo.$error.required">Fill Mobile No to Check In</span>
+          <span class="f-s-10 text-color-red"
+                ng-show="addQrCode.mobileNo.$error.minlength">Cannot be less than 10 digit</span>
+          <span class="f-s-10 text-color-red" ng-show="addQrCode.mobileNo.$error.maxlength">Cannot be greater than 10 digit</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">QR Code</span><br>
+            <span class="f-s-10 text-color-green" ng-show="qrCodeModel.qrCodeValue.length > 0">Added!</span>
+            <div class="float-right">
+              <md-button class="md-raised custom-btn-100" ng-click="scanUserQrCode()">SCAN</md-button>
+            </div>
+          </label>
+          <span class="f-s-10 text-color-red"
+                ng-show="qrCodeModel.qrCodeValue.length == 0">Scan QR Code to get QR Code</span>
+        </div>
+      </div>
+      <div class="row">
+        <md-button ng-disabled="addQrCode.$invalid || qrCodeModel.vehicalId == 0 || qrCodeModel.qrCodeValue.length == 0"
+                   class="md-raised custom-btn-100 f-s-14 h-45" ng-click="addUserQrCode()">CREATE
+        </md-button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>
+
+

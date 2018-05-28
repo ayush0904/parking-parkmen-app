@@ -1,0 +1,32 @@
+<ion-view>
+  <ion-content style="background: #FBF8F1;">
+    <div class="row p-0">
+      <div class="col p-0">
+        <img ng-src="img/screens/login-screen.png" class="w-100">
+      </div>
+    </div>
+    <form name="loginForm">
+      <div class="row">
+        <div class="login-form w-100">
+          <div class="list list-inset">
+            <label class="item item-input">
+              <input type="text" placeholder="Email Id/Phone no" ng-model="user.userName" required name="userName">
+            </label>
+            <label class="item item-input">
+              <input type="password" required name="password" placeholder="Password" ng-model="user.password">
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <md-button ng-disabled="loginForm.$invalid" class="md-raised custom-btn-100 f-s-14 h-45" ng-click="login()">Login</md-button>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col text-center">
+        <span class="f-s-12" ui-sref="forgetPassword">FORGET PASSWORD?</span>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+

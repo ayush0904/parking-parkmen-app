@@ -1,0 +1,290 @@
+<ion-view>
+  <div class="bar bar-header custom-navbar">
+    <span class="custom-title">{{barTitle}}</span>
+    <md-menu class="custom-right-5" md-offset="0 -7">
+      <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+        <md-icon md-menu-origin>more_vert</md-icon>
+      </md-button>
+      <md-menu-content width="2">
+        <md-menu-item>
+          <md-button ng-click="openChangeParkingMode()">Modes</md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+    <md-select class="custom-right-70" placeholder="Select Gate No" ng-model="parkingGate.gateId"
+               md-on-close="changeGateNo()" md-on-open="setCenterGate()"
+               style="min-width: 100px;margin-top: 10px !important;">
+      <md-option ng-value="gate.gateID" ng-repeat="gate in parkingGatesArray">{{gate.gateName}}</md-option>
+    </md-select>
+  </div>
+  <!--content start here-->
+  <ion-content class="has-header-60" overflow-scroll="false">
+    <div ng-show="isCheckIn">
+      <!--show vehical icons-->
+      <div class="row">
+        <div class="col" ng-repeat="type in vehicalTypeArray">
+          <md-card class="custom-card-view text-center">
+            <label class="custom-input-label" style="height: 90px;">
+              <input type="radio" name="vehical" ng-click="buttonClickable()" ng-model="booking.vehicalId"
+                     ng-value="type.vehicalTypeId"/>
+              <img ng-src="img/icons/{{type.vehicalTypeName}}.svg" height="80" width="80">
+            </label>
+          </md-card>
+        </div>
+      </div>
+      <!--show vehical type-->
+      <div class="row">
+        <div class="col  text-center">
+        <span class="f-w-700"
+              style="font-size:20px;text-transform: uppercase;color: #39135B;">{{booking.vehicalType}}</span>
+        </div>
+      </div>
+      <!--mobile no-->
+      <form name="searchUser">
+        <div class="row p-b-0">
+          <div class="col-2">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Mobile No.</span>
+              <input ng-minlength="10" ng-maxlength="10" name="mobileNo" type="number" required ng-trim="true"
+                     placeholder="ex 99XXXX68XX" ng-model="user.mobileNo" style="font-size: 25px;">
+            </label>
+            <span class="f-s-10 text-color-red"
+                  ng-show="searchUser.mobileNo.$error.required">Fill Mobile No to Check In</span>
+            <span class="f-s-10 text-color-red" ng-show="searchUser.mobileNo.$error.minlength">Cannot be less than 10 digit</span>
+            <span class="f-s-10 text-color-red" ng-show="searchUser.mobileNo.$error.maxlength">Cannot be greater than 10 digit</span>
+          </div>
+          <div class="col">
+            <md-button ng-click="registerUser()" class="md-raised md-primary" style="height: 71px;margin-top: -5px;"
+                       ng-disabled="searchUser.$invalid || searchButtonEnable">Search
+            </md-button>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+      <div class="col ">
+        <button class="button float-right" ng-click="scanQrCode()">SCAN</button>
+      </div>
+      </div>
+
+      <div ng-if="vehicalSearchResultArray.length > 0 || noVehicalMsg">
+        <div class="row" ng-if="noVehicalMsg">
+          <span class="f-s-10 text-color-grey">{{noVehicalMsg}}</span>
+        </div>
+        <div ng-if="vehicalSearchResultArray.length > 0">
+          <div class="row p-t-0">
+            <div class="col p-t-0">
+              <md-button class="float-right m-t-0 m-b-0" ng-click="uncheckVehicals()">CLEAR</md-button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <md-card>
+                <ion-radio ng-model="booking.vehicalNo" ng-value="vehical.vehicalNo"
+                           ng-repeat="vehical in vehicalSearchResultArray">{{vehical.vehicalNo}}
+                </ion-radio>
+              </md-card>
+            </div>
+          </div>
+        </div>
+        <div ng-if="booking.vehicalType == 'Car' || booking.vehicalType == 'Bike'">
+          <div class="col" ng-show="!booking.vehicalNo">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Vehical No</span>
+              <input name="cycleParkingID" type="text" required ng-trim="true"
+                     placeholder="ex UP 70 3638" ng-model="user.parkingID" style="font-size: 15px;">
+            </label>
+          </div>
+        </div>
+        <div class="row" ng-if="booking.vehicalType == 'Cycle'">
+          <div class="col">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Parking ID</span>
+              <input name="cycleParkingID" type="text" required ng-trim="true" ng-disabled="true"
+                     placeholder="click right button to generate" ng-model="user.parkingID"
+                     style="font-size: 15px;">
+            </label>
+          </div>
+
+          <div class="col-2">
+            <md-button ng-click="generateCycleParkingID()" class="md-fab md-primary" aria-label="generate_id">
+              <md-icon>create</md-icon>
+            </md-button>
+          </div>
+        </div>
+      </div>
+      <div class="row"
+           ng-if="(booking.vehicalNo.length > 0 || user.parkingID.length > 0) && booking.vehicalType.length > 0">
+        <div class="col m-r-10">
+          <md-button class="md-raised md-primary w-100" ng-click="registerBooking()">Check In</md-button>
+        </div>
+      </div>
+    </div>
+    <div ng-show="!isCheckIn">
+      <br>
+      <form name="checkOutUser">
+        <div class="row p-b-0">
+          <div class="col-2">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">OTP/Vehicle No</span>
+              <input name="otpVehicalNo" type="text" required ng-trim="true"
+                     placeholder="4 digit OTP or Vehicle No" ng-model="checkOutObj.searchCode" style="font-size: 18px;">
+            </label>
+            <span class="f-s-10 text-color-red"
+                  ng-show="checkOutUser.otpVehicalNo.$error.required">Enter OTP or vehical no.</span>
+          </div>
+          <div class="col">
+            <md-button ng-click="searchChekedInUser()" class="md-raised md-primary"
+                       style="height: 71px;margin-top: -5px;"
+                       ng-disabled="checkOutUser.$invalid">Search
+            </md-button>
+          </div>
+        </div>
+      </form>
+      <!--TODO MOVE FROM HERE-->
+      <div class="row">
+        <div class="col ">
+          <button class="button float-right" ng-click="scanQrCodeForCheckOut()">SCAN</button>
+        </div>
+      </div>
+      <div ng-if="showCheckOutDataScreen">
+        <!--searched vehical detail-->
+        <md-divider></md-divider>
+        <div class="row p-l-10">
+          <md-list-item class="secondary-button-padding">
+            <div class="col-2">
+              <div ng-switch="userCheckInData.vehicalType">
+                <img ng-switch-when="1" ng-src="img/icons/Car.svg" height="50" width="50">
+                <img ng-switch-when="2" ng-src="img/icons/Bike.svg" height="50" width="50">
+                <img ng-switch-when="3" ng-src="img/icons/Cycle.svg" height="50" width="50">
+              </div>
+            </div>
+            <div class="col p-l-20">
+              <span class="f-s-18 f-w-700">{{userCheckInData.vehicalNumber}}</span>
+            </div>
+          </md-list-item>
+        </div>
+        <md-divider></md-divider>
+        <div class="row p-l-10">
+          <md-list-item class="secondary-button-padding">
+            <div class="col-2">
+                <img ng-src="img/user-icon.png" height="30" width="30">
+            </div>
+            <div class="col p-l-20">
+              <span class="f-s-18 f-w-700">{{userCheckInData.phoneNo}}</span>
+            </div>
+          </md-list-item>
+        </div>
+        <md-divider></md-divider>
+
+        <!--in and out time-->
+        <div class="row p-l-10">
+          <md-list-item class="secondary-button-padding">
+            <div class="col-2">
+              <span class="f-s-10 text-color-black">{{userCheckInData.checkInDateTime | date:'yyyy-MM-dd HH:mm'}}</span><br>
+              <span class="f-s-10 text-color-black">{{userCheckInData.currentDateTime | date:'yyyy-MM-dd HH:mm'}}</span>
+            </div>
+            <div class="col p-l-20">
+              <span class="f-s-12 text-color-red f-w-500">IN</span> <span class="f-s-10 m-l-10">Gate {{userCheckInData.checkInGateNo}}</span><br>
+              <span class="f-s-12 text-color-green f-w-500">OUT</span><span class="f-s-10 m-l-10">Gate {{getCurrentGateName()}}</span>
+            </div>
+          </md-list-item>
+        </div>
+        <md-divider></md-divider>
+
+        <!--fare and time-->
+        <div class="row p-l-10">
+          <md-list-item class="secondary-button-padding">
+            <div class="col-2">
+              <img ng-src="img/icons/time-icon.svg" height="50" width="50">
+            </div>
+            <div class="col p-l-20">
+              <span class="f-s-15 f-w-500">&#8377 {{userCheckInData.pricing}}</span>
+            </div>
+            <div class="col-2 p-l-20">
+              <span class="f-s-15 f-w-500">{{userCheckInData.parkingTime}} Hrs</span>
+            </div>
+          </md-list-item>
+        </div>
+        <md-divider></md-divider>
+
+        <!--billing details-->
+        <md-subheader style="background: transparent;">Billing</md-subheader>
+        <div class="row p-l-10">
+          <md-list-item class="secondary-button-padding">
+            <div class="col">
+              <span>Parking Fare</span><br>
+              <span>Round Off</span>
+            </div>
+            <div class="col">
+              <span class="float-right f-s-15 f-w-500">&#8377 {{userCheckInData.pricing}}</span><br>
+              <span class="float-right f-s-15 f-w-500">&#8377 {{roundOffPriceAmount }}</span>
+            </div>
+          </md-list-item>
+        </div>
+        <div class="row p-l-10">
+          <md-list-item class="secondary-button-padding">
+            <div class="col">
+              <span>Total Fare</span>
+            </div>
+            <div class="col">
+              <span class="float-right f-s-15 f-w-500">&#8377 {{parkingTotalFare}}</span>
+            </div>
+          </md-list-item>
+        </div>
+        <md-divider></md-divider>
+
+        <!--paymant details-->
+        <md-subheader style="background: transparent;">Payment</md-subheader>
+        <div class="row p-l-10">
+          <md-list-item class="secondary-button-padding">
+            <div class="col">
+              <span>Pass</span><br>
+              <span>Cash</span>
+            </div>
+            <div class="col">
+              <span class="float-right f-s-15 f-w-500">{{passStatus}}</span><br>
+              <span class="float-right f-s-15 f-w-500">&#8377 {{checkOutObj.finalPaymentCash}}</span>
+            </div>
+          </md-list-item>
+        </div>
+        <div class="row p-l-10" ng-if="showDiscountMenu">
+          <md-list-item class="secondary-button-padding">
+            <div class="col">
+              <span>Discount</span>
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <span class="float-right f-s-15 f-w-500">&#8377 {{checkOutObj.discountAmount}}</span>
+                </div>
+                <div class="col-2" ng-show="!isDiscountApplied">
+                  <md-button ng-click="showDiscountModal()" class="md-fab md-mini md-primary" aria-label="add_discount">
+                    <md-icon>create</md-icon>
+                  </md-button>
+                </div>
+                <div class="col-2" ng-show="isDiscountApplied">
+                  <md-button ng-click="removeDiscount()" class="md-fab md-mini" aria-label="add_discount">
+                    <md-icon>delete</md-icon>
+                  </md-button>
+                </div>
+              </div>
+
+            </div>
+          </md-list-item>
+        </div>
+
+        <div class="row">
+          <div class="col m-r-10">
+            <md-button class="md-raised md-primary w-100" ng-click="checkOutVehical()">CHECK OUT (&#8377
+              {{checkOutObj.finalPaymentCash}})
+            </md-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+
+<style>
+
+</style>

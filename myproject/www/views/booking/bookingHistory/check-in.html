@@ -1,0 +1,59 @@
+<ion-content class="custom-background m-b-65" overflow-scroll="false">
+  <div ng-if="!noCheckInVehicals">
+    <md-card class="custom-card-view" ng-repeat="checkIn in allCurrentCheckInDataArray">
+      <md-card-content class="p-b-0">
+        <div class="row">
+          <div class="col-4">
+            <div ng-switch="checkIn.vehicalTypeId">
+              <img ng-switch-when="1" ng-src="img/icons/Car.svg" height="50" width="50">
+              <img ng-switch-when="2" ng-src="img/icons/Bike.svg" height="50" width="50">
+              <img ng-switch-when="3" ng-src="img/icons/Cycle.svg" height="50" width="50">
+            </div>
+          </div>
+          <div class="col m-l-10">
+            <span class="f-s-18 f-w-700">{{checkIn.vehicalNo}}</span><br>
+            <span class="f-s-14 text-color-grey">Date : {{checkIn.checkInDateTime | date:'yyyy-MM-dd'}}</span>
+            <br>
+            <span class="f-s-12 text-color-grey">{{checkIn.checkInGateName}}</span>
+          </div>
+          <div class="col p-t-0 m-r-10">
+            <div class="float-right">
+              <img ng-src="img/icons/parking-icon.svg" height="30"
+                   width="30"><br>
+              <label class="f-s-14 f-w-700">{{"GATE " + checkIn.gateNo}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="provider-experience">Mobile No  : {{checkIn.userPhoneNo}}</span><br>
+            <span class="f-s-12 text-color-red">TIME IN  {{checkIn.checkInDateTime | date:'h:mm a'}}</span>
+          </div>
+          <div class="col">
+            <div class="float-right">
+              <md-button class="md-raised custom-btn-color m-t-0 f-s-10"
+                         ng-click="confirmUserCheckInDelete($event,checkIn.bookingId)">Delete
+              </md-button>
+            </div>
+          </div>
+        </div>
+      </md-card-content>
+
+    </md-card>
+  </div>
+  <div ng-if="noCheckInVehicals" class="m-t-80">
+    <div class="row">
+      <div class="col text-center p-b-0">
+        <img ng-src="img/no-recharge-icon.png" height="120" width="120">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center p-t-0">
+        <span class="f-s-18 f-w-500">Seems you have not done any check In yet</span><br>
+        <span class="f-s-10 text-color-grey">What are you waiting for?</span><br>
+        <md-button class="md-raised custom-btn-color f-s-10 h-45" ui-sref="main.dashboard">Start Here</md-button>
+      </div>
+    </div>
+  </div>
+</ion-content>
+

@@ -1,0 +1,22 @@
+<md-bottom-sheet class="md-list md-has-header bg-color-white">
+  <md-subheader ng-cloak>Update User Details</md-subheader>
+  <form name="updateUser">
+    <div class="row">
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Name</span>
+          <input type="text" name="name" required ng-trim="true" ng-model="userObj.name"
+                 placeholder="Name..">
+          <span class="text-color-red f-s-10" ng-show="updateUser.name.$error.required">Enter name</span>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <md-button ng-disabled="updateUser.$invalid" class="md-raised custom-btn-100 f-s-14 h-45"
+                 ng-click="updateUserInfo()">Update
+      </md-button>
+    </div>
+  </form>
+
+</md-bottom-sheet>
+

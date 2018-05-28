@@ -1,0 +1,51 @@
+<ion-view>
+  <!--Bar header-->
+  <div class="bar bar-header custom-navbar">
+    <md-button class="md-icon-button" ng-click="goBack()" aria-label="More">
+      <i class="text-color-black icon ion-android-arrow-back"></i>
+    </md-button>
+    <span class="custom-title">View profile</span>
+  </div>
+
+  <ion-content class="has-header-60 custom-background" overflow-scroll="false">
+    <md-card class="custom-card-view">
+      <div class="row  padding">
+        <div class="col-3">
+          <img ng-src="{{user.storeIcon ? user.storeIcon:'img/user-icon.png'}}" height="50" width="50">
+        </div>
+        <div class="col">
+          <span class="f-s-18 m-l-10 f-w-700">{{user.userName}}</span><br>
+          <span class="f-s-15 m-l-10 ">EMAIL : {{user.emailID}}</span><br>
+          <span class="f-s-10 m-l-10 ">PHONE NO : {{user.phoneNo}}</span><br>
+        </div>
+      </div>
+      <label class="padding f-s-12">Member since : {{user.dateOfRegistration | date :'yyyy-MM-dd'}}</label>
+    </md-card>
+
+    <md-card class="custom-card-view">
+      <div class="row">
+        <div class="col">
+          <span class="f-s-12">Works At : {{user.centerName}}({{user.centerId}})</span>
+        </div>
+      </div>
+    </md-card>
+    <md-card class="custom-card-view">
+      <div class="row">
+        <div class="col">
+          <span class="f-s-12">WORKING PROFILE : Parking Guard</span>
+        </div>
+      </div>
+    </md-card>
+    <md-card class="custom-card-view">
+      <div class="row">
+        <div class="col">
+          <span class="f-s-12">DUTY AT : Gate {{user.gateNo}}</span><br>
+          <span class="f-s-10">{{user.parkingMode}}</span>
+        </div>
+      </div>
+    </md-card>
+  </ion-content>
+
+</ion-view>
+
+

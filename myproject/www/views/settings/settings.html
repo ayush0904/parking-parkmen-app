@@ -1,0 +1,27 @@
+<ion-view>
+  <!--Bar header-->
+  <div class="bar bar-header custom-navbar">
+    <span class="custom-title">More</span>
+  </div>
+  <!--content start here-->
+  <ion-content class="has-header-60" overflow-scroll="false" has-bouncing="true">
+    <md-subheader class="md-no-sticky f-s-12 f-w-700 text-color-grey">Share Parking App</md-subheader>
+    <md-list-item on-tap="rateApp()" ng-repeat="i in settingsMenu" ng-if="i.section == 1">
+      <i class="primary-color f-s-30 icon {{i.icon_text}}"></i>
+      <p class="p-absolute f-s-15 l-60"> {{ i.name }} </p>
+      <i class="icon ion-chevron-right custom-right"></i>
+      <md-divider></md-divider>
+    </md-list-item>
+    <md-subheader class="md-no-sticky f-s-12 f-w-700 text-color-grey">About</md-subheader>
+    <md-list-item on-tap="openPage(i.link)" ng-repeat="i in settingsMenu" ng-if="i.section == 3">
+      <i class="primary-color f-s-30 icon {{i.icon_text}}"></i>
+      <p class="p-absolute f-s-15 l-60"> {{ i.name }} </p>
+      <i class="icon ion-chevron-right custom-right"></i>
+      <md-divider></md-divider>
+    </md-list-item>
+    <br><br>
+    <span class="col text-center f-s-10">V 1.0</span>
+    <span class="col text-center f-s-10">Made by KAS GROUP.</span>
+  </ion-content>
+</ion-view>
+

@@ -1,0 +1,52 @@
+<ion-view>
+  <!--Bar header-->
+  <div class="bar bar-header custom-navbar">
+    <md-button class="md-icon-button" ng-click="goBack()" aria-label="More">
+      <i class="text-color-black icon ion-android-arrow-back"></i>
+    </md-button>
+    <span class="custom-title">View QR Codes</span>
+  </div>
+  <ion-content class="has-header-60 custom-background" overflow-scroll="false" style="margin-bottom: 50px">
+
+    <md-card md-ink-ripple="true" class="p-relative custom-card-view" ng-click="openUpdateSheet(qrCodes)" ng-repeat="qrCodes in usersQrCodesArray">
+      <md-card-content class="p-b-0">
+        <div class="row">
+          <div class="col-4">
+            <div ng-switch="qrCodes.vehicalId">
+              <img ng-switch-when="1" ng-src="img/icons/Car.svg" height="50" width="50">
+              <img ng-switch-when="2" ng-src="img/icons/Bike.svg" height="50" width="50">
+              <img ng-switch-when="3" ng-src="img/icons/Cycle.svg" height="50" width="50">
+            </div>
+          </div>
+          <div class="col m-l-10">
+            <span class="f-s-12 f-w-700">{{qrCodes.name || "N/A" }}</span><br>
+            <span class="f-s-12 text-color-green">{{qrCodes.phoneNo}}</span>
+          </div>
+        </div>
+      </md-card-content>
+
+    </md-card>
+
+    <!--show custom icon when no pass history is found-->
+    <div ng-if="!isQrCodesFound" class="m-t-80">
+      <div class="row">
+        <div class="col text-center p-b-0">
+          <img ng-src="img/no-pass.png" height="120" width="120">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center p-t-0">
+          <span class="f-s-18 f-w-500">No QR Codes found</span><br>
+          <span class="f-s-10 text-color-grey">What are you waiting for? Start creating Qr codes.</span><br>
+          <md-button class="md-raised custom-btn-color f-s-12" ui-sref="addQrCode">Start</md-button>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+  <div class="bar bar-footer p-0">
+    <md-button class="md-raised m-0 f-s-14 f-w-500 w-100 b-r-0">
+      {{noOfVehiclesWithQrCodes +" VEHICLES"}}
+    </md-button>
+  </div>
+</ion-view>

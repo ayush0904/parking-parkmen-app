@@ -1,0 +1,27 @@
+<ion-content class="custom-background m-b-65" overflow-scroll="false">
+<md-card class="custom-card-view" ng-repeat="amount in bookingAmountDataArray">
+  <md-subheader class="f-s-10">Date : <span class="f-s-15 m-l-10"> {{amount.date}}</span></md-subheader>
+  <div class="row">
+    <div class="col">
+      <span class="f-s-15 f-w-500">&#x20b9 {{amount.amountCollected}}</span>
+    </div>
+    <div class="col ">
+      <span class="float-right f-s-15 ">{{amount.totalBookings}} Bookings</span>
+    </div>
+  </div>
+</md-card>
+  <!--show custom icon when no payment history is found-->
+  <div ng-if="showRegularAmountFound" class="m-t-80">
+    <div class="row">
+      <div class="col text-center p-b-0">
+        <img ng-src="img/no-payment-icon.png" height="120" width="120">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center p-t-0">
+        <span class="f-s-18 f-w-500">No Payment History Found</span><br>
+        <span class="f-s-14 text-color-grey">All your payment history will be here!</span>
+      </div>
+    </div>
+  </div>
+</ion-content>

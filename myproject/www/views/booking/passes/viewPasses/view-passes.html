@@ -1,0 +1,80 @@
+<ion-view>
+  <!--Bar header-->
+  <div class="bar bar-header custom-navbar">
+    <md-button class="md-icon-button" ng-click="goBack()" aria-label="More">
+      <i class="text-color-black icon ion-android-arrow-back"></i>
+    </md-button>
+    <span class="custom-title">View Passes</span>
+  </div>
+  <ion-content class="has-header-60 custom-background" overflow-scroll="false">
+
+    <md-card class="custom-card-view" ng-repeat="passes in usersPassesArray">
+      <md-card-content class="p-b-0">
+        <div class="row">
+          <div class="col-4">
+            <div ng-switch="passes.vehicalType">
+              <img ng-switch-when="1" ng-src="img/icons/Car.svg" height="50" width="50">
+              <img ng-switch-when="2" ng-src="img/icons/Bike.svg" height="50" width="50">
+              <img ng-switch-when="3" ng-src="img/icons/Cycle.svg" height="50" width="50">
+            </div>
+          </div>
+          <div class="col m-l-10">
+            <span class="f-s-10 text-color-grey">From : </span><span class="f-s-15 f-w-500">{{passes.startDate | date : 'dd-MM-yyyy'}}</span><br>
+            <span class="f-s-10 text-color-grey">To : </span><span class="f-s-15 f-w-500">{{passes.endDate | date : 'dd-MM-yyyy'}}</span>
+          </div>
+
+          <div class="col p-t-0 m-r-10">
+            <div class="float-right">
+              <div ng-switch="passes.passStatus">
+                <span ng-switch-when="Expired" class="badge float-right f-s-10 text-color-white"
+                      style="background:#ffe87c">Inactive</span>
+                <span ng-switch-when="Active" class="badge float-right f-s-10 text-color-white"
+                      style="background:#4cd964">Active</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label class="f-s-14 f-w-700">{{passes.name}}</label><br>
+            <!--<label class="f-s-12 f-w-500 text-color-green">{{"UP70 FG 6545"}}</label><br>-->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="f-s-12">Mobile No  : {{passes.phoneNo}}</span><br>
+            <span class="f-s-12">Created On  : {{passes.addedOn | date : 'dd-MM-yyyy'}}</span><br>
+            <label class="f-s-14 f-w-700">{{"&#8377" + passes.price}}</label><br>
+
+          </div>
+          <div class="col">
+            <div class="float-right">
+              <md-button class="md-raised custom-btn-color m-t-0 f-s-10"
+                         ng-click="confirmUserPassDelete($event,passes.passId)">
+                Delete
+              </md-button>
+            </div>
+          </div>
+        </div>
+      </md-card-content>
+
+    </md-card>
+
+    <!--show custom icon when no pass history is found-->
+    <div ng-if="!isPassFound" class="m-t-80">
+      <div class="row">
+        <div class="col text-center p-b-0">
+          <img ng-src="img/no-pass.png" height="120" width="120">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center p-t-0">
+          <span class="f-s-18 f-w-500">No pass found</span><br>
+          <span class="f-s-10 text-color-grey">What are you waiting for? Start creating passes.</span><br>
+          <md-button class="md-raised custom-btn-color f-s-12" ui-sref="createPasses">Start</md-button>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

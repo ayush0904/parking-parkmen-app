@@ -1,0 +1,23 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools primary-color">
+        <span class="text-color-white">{{centerInfo[0].centerName}}</span>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+     <div class="row">
+      <md-select md-on-close="checkViewValue()" class="w-100 m-t-10 m-b-0" placeholder="Select parking Mode" ng-model="parkingView">
+        <md-option ng-value="type" ng-repeat="type in parkingType">{{type.typeName}}</md-option>
+      </md-select>
+     </div>
+      <span class="text-color-red f-s-10 m-l-10" ng-show="showRequiredError">Please select parking Mode</span>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button class="md-raised custom-btn-100 f-s-14 h-45" ng-click="setParkingView()">START</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

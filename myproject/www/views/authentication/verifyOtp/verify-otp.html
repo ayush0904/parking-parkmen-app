@@ -1,0 +1,34 @@
+<ion-view>
+  <div class="bar bar-header custom-navbar">
+    <md-button class="md-icon-button" ng-click="goBack()" aria-label="More">
+      <i class="text-color-black icon ion-android-arrow-back"></i>
+    </md-button>
+    <span class="custom-title">Verify Otp</span>
+  </div>
+  <ion-content class="has-header-60 custom-background">
+    <br><br>
+    <div class="row">
+      <div class="col text-center">
+        <span class="f-s-12 text-color-grey">Enter 6 digit OTP send to your no.</span>
+      </div>
+    </div>
+    <form name="verifyOtp">
+      <div class="row">
+        <div class="login-form w-100">
+          <div class="list list-inset">
+            <label class="item item-input">
+              <input type="number" placeholder="6 Digit OTP" required ng-minlength="6" ng-maxlength="6" name="otp"
+                     ng-model="verifyOtpObj.otp">
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <md-button ng-disabled="verifyOtp.$invalid" class="md-raised custom-btn-100 f-s-14 h-45"
+                   ng-click="verifyPasswordResetOtp()">Verify
+        </md-button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>
+

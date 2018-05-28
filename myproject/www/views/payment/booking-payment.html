@@ -1,0 +1,30 @@
+<ion-view>
+  <!--Bar header-->
+  <div class="bar bar-header custom-navbar">
+    <md-button class="md-icon-button" ng-click="goBack()" aria-label="More">
+      <i class="text-color-black icon ion-android-arrow-back"></i>
+    </md-button>
+    <i class="icon ion-funnel" ng-show="!isPassScreen"
+       style="position: absolute;right: 18px;line-height:50px;font-size: 25px !important; "
+       ng-click="showFiltersSheet()"></i>
+    <span class="custom-title">Earnings</span>
+  </div>
+
+  <div class="has-header-60 custom-background">
+    <ion-slide-box on-slide-changed="slideHasChanged($index)" slide-tabs-scrollable="false" show-pager="false"
+                   ion-slide-tabs>
+      <ion-slide ion-slide-tab-label="BOOKINGS">
+        <div ng-include src="'views/payment/regular-earnings.html'" style="height: {{Height}}px;"></div>
+      </ion-slide>
+      <ion-slide ion-slide-tab-label="PASSES">
+        <div ng-include src="'views/payment/passes.html'" style="height: {{Height}}px;"></div>
+      </ion-slide>
+    </ion-slide-box>
+  </div>
+  <div class="bar bar-footer p-0">
+    <md-button class="md-raised m-0 f-s-14 f-w-500 w-100 b-r-0">
+      &#x20b9 {{totalAmountCollected}}
+    </md-button>
+  </div>
+</ion-view>
+

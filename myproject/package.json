@@ -1,0 +1,45 @@
+{
+  "name": "myproject",
+  "version": "0.0.1",
+  "description": "An Ionic project",
+  "devDependencies": {
+    "gulp": "^3.5.6",
+    "gulp-clean-css": "^3.7.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^3.1.0"
+  },
+  "cordova": {
+    "plugins": {
+      "ionic-plugin-keyboard": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-apprate": {},
+      "cordova-plugin-network-information": {},
+      "cordova-plugin-statusbar": {},
+      "com.telerik.plugins.nativepagetransitions": {},
+      "phonegap-plugin-barcodescanner": {},
+      "cordova-plugin-inappbrowser": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  },
+  "dependencies": {
+    "com.telerik.plugins.nativepagetransitions": "git+https://github.com/Telerik-Verified-Plugins/NativePageTransitions.git#0.6.5",
+    "cordova-android": "~7.0.0",
+    "cordova-plugin-apprate": "git+https://github.com/pushandplay/cordova-plugin-apprate.git",
+    "cordova-plugin-device": "1.1.4",
+    "cordova-plugin-dialogs": "^2.0.1",
+    "cordova-plugin-globalization": "^1.0.9",
+    "cordova-plugin-inappbrowser": "^2.0.1",
+    "cordova-plugin-ionic-webview": "^1.1.11",
+    "cordova-plugin-network-information": "^2.0.1",
+    "cordova-plugin-splashscreen": "~4.0.1",
+    "cordova-plugin-statusbar": "^2.4.1",
+    "cordova-plugin-whitelist": "1.3.1",
+    "ionic-plugin-keyboard": "~2.2.1",
+    "phonegap-plugin-barcodescanner": "git+https://github.com/phonegap/phonegap-plugin-barcodescanner.git"
+  }
+}

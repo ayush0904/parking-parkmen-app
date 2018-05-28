@@ -1,0 +1,55 @@
+<ion-content class="custom-background m-b-65" overflow-scroll="false">
+  <div ng-if="!noCheckOutVehicals">
+    <md-card class="custom-card-view" ng-repeat="checkOut in allCheckOutDataArray">
+      <md-card-content class="p-b-0">
+        <div class="row">
+          <div class="col-4">
+            <div ng-switch="checkOut.vehicalTypeId">
+              <img ng-switch-when="1" ng-src="img/icons/Car.svg" height="50" width="50">
+              <img ng-switch-when="2" ng-src="img/icons/Bike.svg" height="50" width="50">
+              <img ng-switch-when="3" ng-src="img/icons/Cycle.svg" height="50" width="50">
+            </div>
+          </div>
+          <div class="col m-l-10">
+            <span class="f-s-18 f-w-700">{{checkOut.vehicalNo}}</span><br>
+            <br>
+          </div>
+          <div class="col p-t-0 m-r-10">
+            <div class="float-right">
+              <div ng-switch="checkOut.isAmountByCash">
+                <img ng-switch-when="0" ng-src="img/icons/pass.svg" height="50" width="50">
+                <img ng-switch-when="1" ng-src="img/icons/cash.svg" height="50" width="50">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="provider-experience">Mobile No  : {{checkOut.userPhoneNo}}</span><br>
+            <span class="f-s-12 text-color-red">TIME IN  {{checkOut.checkInDateTime | date:'h:mm a yyyy-MM-dd'}}</span>
+            <br> <span class="f-s-12 text-color-green">TIME OUT  {{checkOut.checkOutDateTime | date:'h:mm a yyyy-MM-dd'}}</span>
+          </div>
+          <div class="col">
+            <div class="float-right">
+              <span class="f-w-700 f-s-30">&#8377 {{checkOut.bookingAmount}}</span>
+            </div>
+          </div>
+        </div>
+      </md-card-content>
+
+    </md-card>
+  </div>
+  <div ng-if="noCheckOutVehicals" class="m-t-80">
+    <div class="row">
+      <div class="col text-center p-b-0">
+        <img ng-src="img/no-recharge-icon.png" height="120" width="120">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center p-t-0">
+        <span class="f-s-18 f-w-500">You have no check out history yet</span><br>
+        <span class="f-s-10 text-color-grey">Make sure to start soon</span><br>
+      </div>
+    </div>
+  </div>
+</ion-content>

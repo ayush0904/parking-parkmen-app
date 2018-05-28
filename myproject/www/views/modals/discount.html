@@ -1,0 +1,42 @@
+<ion-modal-view>
+  <div class="bar bar-header custom-navbar">
+    <md-button class="md-icon-button" ng-click="hideDiscountModal()" aria-label="More">
+      <i class="text-color-black icon ion-android-arrow-back"></i>
+    </md-button>
+    <span class="custom-title">Apply Discount</span>
+  </div>
+
+  <ion-content class="has-header-60">
+    <br>
+    <div class="row">
+      <div class="col text-center">
+        <span class="f-s-12 text-color-grey">Apply discount here!</span>
+      </div>
+    </div>
+
+    <form name="fareDiscount">
+      <div class="row">
+        <div class="w-100">
+          <div class="list list-inset">
+            <label class="item item-input">
+              <input name="discountAmount" required type="number" placeholder="Discount Amount"
+                     ng-model="checkOutObj.discountAmount">
+            </label>
+          </div>
+          <span class="f-s-10 text-color-red"
+                ng-show="fareDiscount.discountAmount.$error.required">Enter discount amount.</span>
+          <span class="f-s-10 text-color-red"
+                ng-show="showDiscountError">You cannot enter amount greater than total fare.</span>
+          <span class="f-s-10 text-color-red"
+                ng-show="isDiscountValueNegative">Amount cannot be negative.</span>
+        </div>
+      </div>
+      <div class="row">
+        <md-button ng-disabled="fareDiscount.$invalid" class="md-raised md-primary custom-btn-100 f-s-14 h-45"
+                   ng-click="applyDiscount()">APPLY
+        </md-button>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>
+
